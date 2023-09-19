@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: simpleingressroute-tls
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`site.com`)
+      kind: Rule
+      services:
+        - name: nginx-service
+          port: 80
+  tls:
+    secretName: site-com-secret
